@@ -70,6 +70,9 @@ def transformation():
         data = flask.request.data.decode("utf-8")
         s = io.StringIO(data)
         data = pd.read_csv(s, header=None)
+    elif flask.request.is_json:
+        s = flask.request.json
+        data = pd.DataFrame(json.loads(s))
     else:
         return flask.Response(
             response="This predictor only supports CSV data", status=415, mimetype="text/plain"
@@ -86,3 +89,6 @@ def transformation():
     result = out.getvalue()
 
     return flask.Response(response=result, status=200, mimetype="text/csv")
+
+# if __name__ == '__main__':
+#     app.run()

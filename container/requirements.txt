@@ -7,3 +7,4 @@ pandas
 flask 
 gunicorn
 pyarrow
+category_encoders
